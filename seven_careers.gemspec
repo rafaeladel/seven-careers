@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = "seven_careers"
   s.version     = SevenCareers::VERSION
   s.authors     = ["ahmednagy"]
-  s.email       = ["blackm00n"]
+  s.email       = ["ahmednagy14@gmail.com"]
   s.homepage    = "TODO"
   s.summary     = "TODO: Summary of SevenCareers."
   s.description = "TODO: Description of SevenCareers."
