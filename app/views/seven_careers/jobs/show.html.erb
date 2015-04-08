@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+Job Title <%= @job.title %>
+Description <%= @job.description %>
+
+<%= form_tag job_apply_path(id: @job.id) do |f| %>
+    <%= submit_tag 'Apply to job' %>
+<% end %>
+
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', jobs_path %>
