@@ -31,15 +31,21 @@ module SevenCareers
       @candidate.phone = candidate_params[:phone]
       @candidate.job_id = session[:apply_job_id]
 
-      resume_path = candidate_params[:resume]
-      resume_filename = "#{Random.rand(99999)} " + "#{resume_path.original_filename}"
+      resume = candidate_params[:resume]
 
-      File.open(Rails.root.join('public', 'resumes', resume_filename), 'wb') do |file|
+      uploader = ResumeUploader.new
+      uploader.store!(resume)
 
-        file.write(resume_path.read)
-      end
+      # resume_path = candidate_params[:resume]
+      # resume_filename = "#{Random.rand(99999)} " + "#{resume_path.original_filename}"
+      #
+      # File.open(Rails.root.join('public', 'resumes', resume_filename), 'wb') do |file|
+      #
+      #   file.write(resume_path.read)
+      # end
 
-      @candidate.resume_path = resume_filename
+      # @candidate.resume_path = resume_filename
+      @candidate.resume_path = uploader.filename
 
       respond_to do |format|
         if @candidate.save
