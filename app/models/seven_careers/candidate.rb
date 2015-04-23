@@ -1,6 +1,7 @@
 module SevenCareers
   class Candidate < ActiveRecord::Base
     belongs_to :seven_careers_job, :class_name => 'SevenCareers::Job'
+    belongs_to :status, :class_name => 'SevenCareers::CandidateStatus'
 
     def image_size_validation
       if resume_path.size > 4.megabytes

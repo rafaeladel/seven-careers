@@ -10,6 +10,9 @@
     <th>Phone</th>
     <th>Resume</th>
     <th>Applied At</th>
+    <th>Status</th>
+    <th></th>
+
   </tr>
   </thead>
 
@@ -25,6 +28,16 @@
         <td><%= candidate.phone %></td>
         <td><%= link_to "Download Resume", "/uploads/resumes/#{candidate.resume_path}" %></td>
         <td><%= candidate.created_at %></td>
+        <td>
+          <%= form_for(candidate) do |status| %>
+              <%= collection_select :candidate, :status_id, SevenCareers::CandidateStatus.all, :id, :name, {:include_blank => true, :selected => candidate.status_id}, {:onchange => 'this.form.submit();' }  %>
+          <% end  %>
+
+        </td>
+        <td><%= link_to "Send Resume", candidate_send_resume_url(:id => candidate.id) %></td>
+
+
+
 
       </tr>
   <% end %>

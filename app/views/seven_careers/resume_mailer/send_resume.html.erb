@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1><%= @candidate.name %> Resume</h1>
+<p>
+  Name: <%= @candidate.name %>
+</p>
+
+<p>
+  Email: <%= @candidate.email %>
+</p>
+
+<p>
+  Phone: <%= @candidate.phone %>
+</p>
+
+<p>
+  <%= link_to "Download Resume", "/uploads/resumes/#{@candidate.resume_path}" %>
+</p>
+
+</body>
+</html>

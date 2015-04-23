@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408113739) do
+ActiveRecord::Schema.define(version: 20150422110804) do
 
   create_table "candidates", force: :cascade do |t|
     t.integer  "job_id",      limit: 4
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20150408113739) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "seven_careers_candidate_statuses", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "seven_careers_candidates", force: :cascade do |t|
     t.integer  "job_id",      limit: 4
     t.string   "name",        limit: 255
@@ -38,6 +44,7 @@ ActiveRecord::Schema.define(version: 20150408113739) do
     t.string   "resume_path", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "status_id",   limit: 4
   end
 
   create_table "seven_careers_jobs", force: :cascade do |t|

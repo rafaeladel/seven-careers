@@ -65,7 +65,8 @@ module SevenCareers
     def update
       respond_to do |format|
         if @candidate.update(candidate_params)
-          format.html { redirect_to @candidate, notice: 'Candidate was successfully updated.' }
+          # format.html { redirect_to @candidate, notice: 'Candidate was successfully updated.' }
+          format.html {redirect_to(:back)}
           format.json { render :show, status: :ok, location: @candidate }
         else
           format.html { render :edit }
@@ -84,6 +85,13 @@ module SevenCareers
       end
     end
 
+    def send_resume
+      @candidate = SevenCareers::Candidate.find(params[:id])
+      SevenCareers::ResumeMailer.send_resume(@candidate).deliver_now
+      redirect_to :back, notice: 'Resume mailed successfully.'
+      # format.html {redirect_to(:back, notice: 'Resume mailed successfully.')}
+    end
+
 
     private
     # Use callbacks to share common setup or constraints between actions.
@@ -93,7 +101,8 @@ module SevenCareers
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
-      params.require(:candidate).permit(:name, :email, :phone, :resume)
+      params.require(:candidate).permit(:name, :email, :phone, :resume, :status_id)
     end
+
   end
 end

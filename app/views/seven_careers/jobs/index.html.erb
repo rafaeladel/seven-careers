@@ -6,7 +6,8 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th colspan="3">Action</th>
+      <th>Applied Candidates</th>
+      <th colspan="4">Action</th>
     </tr>
   </thead>
 
@@ -14,6 +15,7 @@
     <% @jobs.each do |job| %>
       <tr>
         <td><%= job.title %></td>
+        <td><%= job.seven_careers_candidates.length %></td>
         <td><%= link_to 'Show', job %></td>
         <td><%= link_to 'Show Applied Candidates', job_show_applied_candidates_path(job.id) %></td>
         <td><%= link_to 'Edit', edit_job_path(job) %></td>
