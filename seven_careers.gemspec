@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = SevenCareers::VERSION
   s.authors     = ["ahmednagy"]
   s.email       = ["ahmednagy14@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of SevenCareers."
-  s.description = "TODO: Description of SevenCareers."
+  s.homepage    = "https://github.com:rafaeladel/seven-careers.git"
+  s.summary     = "Summary of SevenCareers."
+  s.description = "Description of SevenCareers."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
