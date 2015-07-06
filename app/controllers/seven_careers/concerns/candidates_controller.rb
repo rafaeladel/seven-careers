@@ -26,33 +26,23 @@ module SevenCareers::Concerns::CandidatesController
   # POST /candidates
   # POST /candidates.json
   def create
-    @candidate = SevenCareers::Candidate.new
-    @candidate.name = candidate_params[:name]
-    @candidate.email = candidate_params[:email]
-    @candidate.phone = candidate_params[:phone]
-    @candidate.job_id = session[:apply_job_id]
-
-    resume = candidate_params[:resume]
-
-    uploader = ResumeUploader.new
-    uploader.store!(resume)
-
-    # resume_path = candidate_params[:resume]
-    # resume_filename = "#{Random.rand(99999)} " + "#{resume_path.original_filename}"
+    SevenCareers::Job.candidates << SevenCareers::Candidate.new(candidate_params)
+    # @candidate = SevenCareers::Candidate.new
+    # @candidate.name = candidate_params[:name]
+    # @candidate.email = candidate_params[:email]
+    # @candidate.phone = candidate_params[:phone]
+    # @candidate.job_id = session[:apply_job_id]
     #
-    # File.open(Rails.root.join('public', 'resumes', resume_filename), 'wb') do |file|
+    # resume = candidate_params[:resume]
     #
-    #   file.write(resume_path.read)
-    # end
-
-    # @candidate.resume_path = resume_filename
-    @candidate.resume_path = uploader.filename
+    # uploader = ResumeUploader.new
+    # uploader.store!(resume)
 
     respond_to do |format|
       if @candidate.save
         format.html { redirect_to @candidate, notice: "You applied to the job successfully." }
         format.json { render :show, status: :created, location: @candidate }
-        session.delete(:apply_job_id)
+        # session.delete(:apply_job_id)
         flash[:success] = "You applied to the job successfully."
       else
         format.html { render :new }
