@@ -1,5 +1,5 @@
 module SevenCareers
   class Job < ActiveRecord::Base
-    has_many :seven_careers_candidates, :class_name => 'SevenCareers::Candidate'
+    include SevenCareers::Concerns::Job
   end
 end
