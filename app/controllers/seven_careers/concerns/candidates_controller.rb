@@ -1,5 +1,5 @@
 module SevenCareers::Concerns::CandidatesController
-  extend ActionSupport::Concern
+  extend ActiveSupport::Concern
 
   included do
     before_action :set_candidate, only: [:show, :edit, :update, :destroy]

@@ -1,5 +1,5 @@
 module SevenCareers::Concerns::JobsController
-  extend ActionSupport::Concern
+  extend ActiveSupport::Concern
 
   included do
     before_action :set_job, only: [:show, :edit, :update, :destroy]
