@@ -6,18 +6,18 @@ module SevenCareers::Concerns::JobsController
   end
 
   def index
-    @jobs = Job.all
+    @jobs = SevenCareers::Job.all
   end
 
   # GET /jobs/1
   # GET /jobs/1.json
   def show
-    @job = Job.find(params[:id])
+    @job = SevenCareers::Job.find(params[:id])
   end
 
   # GET /jobs/new
   def new
-    @job = Job.new
+    @job = SevenCareers::Job.new
   end
 
   # GET /jobs/1/edit
@@ -27,7 +27,7 @@ module SevenCareers::Concerns::JobsController
   # POST /jobs
   # POST /jobs.json
   def create
-    @job = Job.new(job_params)
+    @job = SevenCareers::Job.new(job_params)
 
     respond_to do |format|
       if @job.save
@@ -65,19 +65,19 @@ module SevenCareers::Concerns::JobsController
   end
 
   def apply
-    @job = Job.find(params[:id])
+    @job = SevenCareers::Job.find(params[:id])
     session[:apply_job_id] = @job.id
     redirect_to new_candidate_url
   end
 
   def show_applied_candidates
-    @job = Job.find(params[:id])
+    @job = SevenCareers::Job.find(params[:id])
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_job
-    @job = Job.find(params[:id])
+    @job = SevenCareers::Job.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
