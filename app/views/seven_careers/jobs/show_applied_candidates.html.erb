@@ -26,7 +26,7 @@
         <td><%= candidate.name %></td>
         <td><%= candidate.email %></td>
         <td><%= candidate.phone %></td>
-        <td><%= link_to "Download Resume", "/uploads/resumes/#{candidate.resume_path}" %></td>
+        <td><%= link_to "Download Resume", candidate.resume.url %></td>
         <td><%= candidate.created_at %></td>
         <td>
           <%= form_for(candidate) do |status| %>
