@@ -5,7 +5,7 @@ class CreateSevenCareersCandidates < ActiveRecord::Migration
       t.string     :name
       t.string     :email
       t.string     :phone
-      t.string     :resume_path
+      t.string     :resume
       t.timestamps null: false
     end
   end

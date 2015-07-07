@@ -13,23 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150422110804) do
 
-  create_table "candidates", force: :cascade do |t|
-    t.integer  "job_id",      limit: 4
-    t.string   "name",        limit: 255
-    t.string   "email",       limit: 255
-    t.string   "phone",       limit: 255
-    t.string   "resume_path", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
-  create_table "jobs", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
   create_table "seven_careers_candidate_statuses", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
@@ -37,14 +20,14 @@ ActiveRecord::Schema.define(version: 20150422110804) do
   end
 
   create_table "seven_careers_candidates", force: :cascade do |t|
-    t.integer  "job_id",      limit: 4
-    t.string   "name",        limit: 255
-    t.string   "email",       limit: 255
-    t.string   "phone",       limit: 255
-    t.string   "resume_path", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "status_id",   limit: 4
+    t.integer  "job_id",     limit: 4
+    t.string   "name",       limit: 255
+    t.string   "email",      limit: 255
+    t.string   "phone",      limit: 255
+    t.string   "resume",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status_id",  limit: 4
   end
 
   create_table "seven_careers_jobs", force: :cascade do |t|

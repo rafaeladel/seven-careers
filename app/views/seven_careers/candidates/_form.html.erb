@@ -1,4 +1,4 @@
-<%= form_for(@candidate, :html => {:multipart => true}) do |f| %>
+<%= form_for([@job, @candidate], :html => {:multipart => true}) do |f| %>
   <% if @candidate.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@candidate.errors.count, "error") %> prohibited this candidate from being saved:</h2>
@@ -11,12 +11,10 @@
     </div>
   <% end %>
 
-    <%= fields_for "candidate" do |candidate| %>
-        Name <%= candidate.text_field :name %>
-        Email <%= candidate.email_field :email %>
-        Phone <%= candidate.phone_field :phone %>
-        Resume <%= candidate.file_field :resume %>
-    <% end %>
+    Name <%= f.text_field :name %>
+    Email <%= f.email_field :email %>
+    Phone <%= f.phone_field :phone %>
+    Resume <%= f.file_field :resume %>
 
   <div class="actions">
     <%= f.submit %>

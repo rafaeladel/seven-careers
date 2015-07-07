@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
-<%= link_to 'Back', candidates_path %>
+<%= link_to "download resume", @candidate.resume.url %>
+
+<%= link_to 'Back', job_url(@job) %>

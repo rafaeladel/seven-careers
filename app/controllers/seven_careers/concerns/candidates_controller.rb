@@ -1,58 +1,30 @@
 module SevenCareers::Concerns::CandidatesController
-  extend ActionSupport::Concern
+  extend ActiveSupport::Concern
 
   included do
-    before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+    before_action :set_job
+    before_action :set_candidate, only: [:show, :destroy]
   end
 
-  def index
-    @candidates = SevenCareers::Candidate.all
-  end
-
-  # GET /candidates/1
-  # GET /candidates/1.json
+  # GET /jobs/1/candidates/1
+  # GET /jobs/1/candidates/1.json
   def show
   end
 
-  # GET /candidates/new
+  # GET /jobs/1/candidates/new
   def new
     @candidate = SevenCareers::Candidate.new
   end
 
-  # GET /candidates/1/edit
-  def edit
-  end
-
-  # POST /candidates
-  # POST /candidates.json
+  # POST /jobs/1/candidates
+  # POST /jobs/1/candidates.json
   def create
-    @candidate = SevenCareers::Candidate.new
-    @candidate.name = candidate_params[:name]
-    @candidate.email = candidate_params[:email]
-    @candidate.phone = candidate_params[:phone]
-    @candidate.job_id = session[:apply_job_id]
-
-    resume = candidate_params[:resume]
-
-    uploader = ResumeUploader.new
-    uploader.store!(resume)
-
-    # resume_path = candidate_params[:resume]
-    # resume_filename = "#{Random.rand(99999)} " + "#{resume_path.original_filename}"
-    #
-    # File.open(Rails.root.join('public', 'resumes', resume_filename), 'wb') do |file|
-    #
-    #   file.write(resume_path.read)
-    # end
-
-    # @candidate.resume_path = resume_filename
-    @candidate.resume_path = uploader.filename
-
-    respond_to do |format|
-      if @candidate.save
-        format.html { redirect_to @candidate, notice: "You applied to the job successfully." }
+    @candidate = SevenCareers::Candidate.new(candidate_params)
+    @job.candidates << @candidate
+     respond_to do |format|
+      if @job.save
+        format.html { redirect_to session[:back_url] || @job, notice: "You applied to the job successfully." }
         format.json { render :show, status: :created, location: @candidate }
-        session.delete(:apply_job_id)
         flash[:success] = "You applied to the job successfully."
       else
         format.html { render :new }
@@ -61,27 +33,12 @@ module SevenCareers::Concerns::CandidatesController
     end
   end
 
-  # PATCH/PUT /candidates/1
-  # PATCH/PUT /candidates/1.json
-  def update
-    respond_to do |format|
-      if @candidate.update(candidate_params)
-        # format.html { redirect_to @candidate, notice: 'Candidate was successfully updated.' }
-        format.html {redirect_to(:back)}
-        format.json { render :show, status: :ok, location: @candidate }
-      else
-        format.html { render :edit }
-        format.json { render json: @candidate.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /candidates/1
-  # DELETE /candidates/1.json
+  # DELETE /jobs/1/candidates/1
+  # DELETE /jobs/1/candidates/1.json
   def destroy
     @candidate.destroy
     respond_to do |format|
-      format.html { redirect_to candidates_url, notice: 'Candidate was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Candidate was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -95,6 +52,11 @@ module SevenCareers::Concerns::CandidatesController
 
 
   private
+
+  def set_job
+    @job = SevenCareers::Job.find(params[:job_id])
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_candidate
     @candidate = SevenCareers::Candidate.find(params[:id])
